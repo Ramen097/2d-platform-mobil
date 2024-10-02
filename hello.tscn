@@ -1,4 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://724he00o53i8"]
+[gd_scene load_steps=11 format=3 uid="uid://724he00o53i8"]
+
+[ext_resource type="Script" path="res://container.gd" id="1_j5ejq"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6w6o7"]
 
@@ -16,16 +18,19 @@ size = Vector2(20, 10.4444)
 
 [sub_resource type="GDScript" id="GDScript_bcyw4"]
 script/source = "extends CharacterBody2D
-
+@onready var color_rect = get_node(\"../Panel/ColorRect\")
 
 const SPEED = 400.0
 const JUMP_VELOCITY = -400.0
-
+var azure = Color.AZURE
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		color_rect.modulate = Color()
+	else:
+		color_rect.modulate = Color(0.5,1,1)
 
 	# Handle jump.
 	if Input.is_action_just_pressed(\"ui_up\") and is_on_floor():#
@@ -46,6 +51,11 @@ func _physics_process(delta: float) -> void:
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jcbyn"]
 radius = 0.55116
+
+[sub_resource type="LabelSettings" id="LabelSettings_s0sbp"]
+line_spacing = 0.0
+font_size = 22
+font_color = Color(0, 0, 0, 1)
 
 [node name="Node2D" type="Node2D"]
 
@@ -70,11 +80,23 @@ physics_material_override = SubResource("PhysicsMaterial_bvnv8")
 position = Vector2(0, 4.77778)
 shape = SubResource("RectangleShape2D_ycog5")
 
+[node name="Panel" type="Panel" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Panel"]
+layout_mode = 0
+offset_right = 132.0
+offset_bottom = 40.0
+color = Color(0.836144, 0.310344, 0.494803, 1)
+
 [node name="Payer" type="CharacterBody2D" parent="."]
-position = Vector2(98, 103)
+position = Vector2(131, 137)
 scale = Vector2(80.5907, 79.5)
 disable_mode = 2
 script = SubResource("GDScript_bcyw4")
+metadata/_edit_group_ = true
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Payer"]
 mesh = SubResource("SphereMesh_rxhjh")
@@ -82,4 +104,84 @@ mesh = SubResource("SphereMesh_rxhjh")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Payer"]
 shape = SubResource("CircleShape2D_jcbyn")
 
-[node name="GITHUB WORKING?" type="Node2D" parent="."]
+[node name="Container" type="HFlowContainer" parent="."]
+offset_right = 14.0
+offset_bottom = 14.0
+alignment = 1
+script = ExtResource("1_j5ejq")
+
+[node name="ColorW" type="ColorRect" parent="Container"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/ColorW"]
+clip_contents = true
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 31.0
+text = "W"
+label_settings = SubResource("LabelSettings_s0sbp")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ColorS" type="ColorRect" parent="Container"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/ColorS"]
+clip_contents = true
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 31.0
+text = "S"
+label_settings = SubResource("LabelSettings_s0sbp")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ColorA" type="ColorRect" parent="Container"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/ColorA"]
+clip_contents = true
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 31.0
+text = "A"
+label_settings = SubResource("LabelSettings_s0sbp")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ColorD" type="ColorRect" parent="Container"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/ColorD"]
+clip_contents = true
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 31.0
+text = "D"
+label_settings = SubResource("LabelSettings_s0sbp")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ColorSpace" type="ColorRect" parent="Container"]
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="Container/ColorSpace"]
+clip_contents = true
+layout_mode = 0
+offset_right = 79.0
+offset_bottom = 31.0
+text = "SPACE"
+label_settings = SubResource("LabelSettings_s0sbp")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
