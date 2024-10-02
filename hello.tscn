@@ -81,3 +81,5 @@ mesh = SubResource("SphereMesh_rxhjh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Payer"]
 shape = SubResource("CircleShape2D_jcbyn")
+
+[node name="GITHUB WORKING?" type="Node2D" parent="."]
