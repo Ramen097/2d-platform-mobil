@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://y23kwwan5ymi"]
+[gd_scene load_steps=7 format=3 uid="uid://dh3g582fn7wkv"]
 
 [ext_resource type="Texture2D" uid="uid://b8kv8fjh8da3n" path="res://icon.svg" id="1_r3x6e"]
 [ext_resource type="Texture2D" uid="uid://d235jmh10s3a4" path="res://Adsız.png" id="2_6lgkv"]
@@ -17,8 +17,8 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	if Input.is_action_just_pressed(\"ui_up\") and is_on_floor():
+		velocity.y = JUMP_VELOCITY  *1.25
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
