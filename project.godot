@@ -41,8 +41,7 @@ ui_up={
 
 [piforge_ai]
 
-api_key="i4G670W808S485C7H893g4l16227i1r6e9HaXEMEwA7XaC09278iwwei6aH9g6lE"
-
+api_key="0"
 [rendering]
 
 renderer/rendering_method="mobile"
