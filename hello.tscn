@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://724he00o53i8"]
+[gd_scene load_steps=12 format=3 uid="uid://724he00o53i8"]
 
 [ext_resource type="Script" path="res://container.gd" id="1_j5ejq"]
+[ext_resource type="Texture2D" uid="uid://b8kv8fjh8da3n" path="res://icon.svg" id="2_swmqx"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6w6o7"]
 
@@ -20,8 +21,8 @@ size = Vector2(20, 10.4444)
 script/source = "extends CharacterBody2D
 @onready var color_rect = get_node(\"../Panel/ColorRect\")
 
-const SPEED = 400.0
-const JUMP_VELOCITY = -400.0
+const SPEED = 500.0
+const JUMP_VELOCITY = -1000.0
 var azure = Color.AZURE
 
 func _physics_process(delta: float) -> void:
@@ -34,7 +35,7 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if Input.is_action_just_pressed(\"ui_up\") and is_on_floor():#
-		velocity.y = JUMP_VELOCITY
+		velocity.y = JUMP_VELOCITY *6
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -48,7 +49,7 @@ func _physics_process(delta: float) -> void:
 "
 
 [sub_resource type="SphereMesh" id="SphereMesh_rxhjh"]
-radius = 1.0
+height = 0.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jcbyn"]
 radius = 0.55116
@@ -61,8 +62,9 @@ font_color = Color(0, 0, 0, 1)
 [node name="Node2D" type="Node2D"]
 
 [node name="BG" type="MeshInstance2D" parent="."]
-modulate = Color(0.524415, 0.153063, 0.171603, 1)
-self_modulate = Color(0, 0.303987, 0.5477, 1)
+visible = false
+modulate = Color(0.492588, 0.07939, 0.475761, 1)
+self_modulate = Color(0.513099, 0.163705, 0.13446, 1)
 material = SubResource("CanvasItemMaterial_6w6o7")
 position = Vector2(574.75, 321.75)
 scale = Vector2(1150.5, 644.5)
@@ -93,9 +95,10 @@ offset_bottom = 40.0
 color = Color(0.836144, 0.310344, 0.494803, 1)
 
 [node name="Payer" type="CharacterBody2D" parent="."]
-position = Vector2(131, 137)
+position = Vector2(401, 249)
 scale = Vector2(80.5907, 79.5)
 disable_mode = 2
+collision_layer = 15
 script = SubResource("GDScript_bcyw4")
 metadata/_edit_group_ = true
 
@@ -104,6 +107,11 @@ mesh = SubResource("SphereMesh_rxhjh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Payer"]
 shape = SubResource("CircleShape2D_jcbyn")
+
+[node name="Icon" type="Sprite2D" parent="Payer"]
+position = Vector2(-1.81162, 1.81132)
+scale = Vector2(0.0124084, 0.0125786)
+texture = ExtResource("2_swmqx")
 
 [node name="Container" type="HFlowContainer" parent="."]
 offset_right = 14.0
