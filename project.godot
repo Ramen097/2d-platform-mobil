@@ -49,7 +49,3 @@ ui_up={
 [piforge_ai]
 
 api_key="0"
-
-[rendering]
-
-renderer/rendering_method="mobile"
